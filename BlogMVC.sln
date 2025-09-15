@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlogMVC", "BlogMVC\BlogMVC.csproj", "{88600FA3-F112-470F-9229-25C50F36C9C1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlogMVCTests", "BlogMVCTests\BlogMVCTests.csproj", "{9AF5B190-8004-4924-9EAD-FA3814DE4772}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{88600FA3-F112-470F-9229-25C50F36C9C1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{88600FA3-F112-470F-9229-25C50F36C9C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{88600FA3-F112-470F-9229-25C50F36C9C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{88600FA3-F112-470F-9229-25C50F36C9C1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9AF5B190-8004-4924-9EAD-FA3814DE4772}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9AF5B190-8004-4924-9EAD-FA3814DE4772}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9AF5B190-8004-4924-9EAD-FA3814DE4772}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9AF5B190-8004-4924-9EAD-FA3814DE4772}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
