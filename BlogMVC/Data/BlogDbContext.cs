@@ -110,4 +110,9 @@ public class BlogDbContext(DbContextOptions<BlogDbContext> options) : IdentityDb
             OwnerId = defaultUser.Id,
         });
     }
+    
+    public DbSet<IdentityUser>? Users { get; set; }
+    public DbSet<Blog>? Blogs { get; set; }
+    public DbSet<Post>? Posts { get; set; }
+    public DbSet<Comment>? Comments { get; set; }
 }

@@ -10,9 +10,9 @@ public class Comment
     [Required]
     public required string Content { get; set; }
     
-    public DateTime Created { get; set; }
+    public DateTime Created { get; set; } = DateTime.Now;
     
-    public DateTime Modified { get; set; }
+    public DateTime Modified { get; set; } =  DateTime.Now;
     
     public int PostId { get; set; }
     
