@@ -26,7 +26,12 @@ public class BlogRepository(BlogDbContext db, UserManager<IdentityUser> userMana
         }
     }
 
-    public void Save(Blog blog, IPrincipal principal)
+    public Blog? GetBlog(int id)
+    {
+        return db.Blogs.Find(id);
+    }
+
+    public void Create(Blog blog, IPrincipal principal)
     {
         var user = userManager.FindByNameAsync(principal.Identity.Name).Result;
         blog.Owner = user;

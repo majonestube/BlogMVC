@@ -6,6 +6,8 @@ namespace BlogMVC.Repositories;
 public interface IBlogRepository
 {
     IEnumerable<Blog> GetBlogs();
-    void Save(Blog blog, IPrincipal principal);
+    
+    Blog? GetBlog(int id);
+    void Create(Blog blog, IPrincipal principal);
     // TODO BlogEditViewModel
 }
