@@ -1,0 +1,32 @@
+﻿@model IEnumerable<BlogMVC.Models.ViewModels.PostsViewModel>
+
+@{
+    ViewBag.Title = ViewBag.Title ?? "Blog";
+    Layout = "_Layout";
+}
+
+<div class="container">
+    <div class="row">
+        @foreach (var post in Model)
+        {
+                <div class="col-mb-4 mb-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">@post.Title</h5>
+                            <p class="card-text overflow-text">@post.Content</p>
+                            <p class="card-subtitle">Last modified: @post.Modified</p>
+                            <p class="card-subtitle">Created: @post.Created</p>
+                            <p>Comments: @post.CommentCount</p>
+                        </div>
+                    </div>
+                </div>
+            
+        }
+        @{
+            if (User.Identity is { IsAuthenticated: true })
+            {
+                <a href="@Url.Action("Create", "Blog")" class="btn btn-primary">Create Blog</a>
+            }
+        }
+    </div>
+</div>

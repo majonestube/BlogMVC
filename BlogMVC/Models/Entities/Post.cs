@@ -10,6 +10,7 @@ public class Post
     [Required]
     public required string Title { get; set; }
     
+    [Required]
     public required string Content { get; set; }
     
     public DateTime Created { get; set; } = DateTime.Now;

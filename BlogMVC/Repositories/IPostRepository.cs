@@ -1,5 +1,6 @@
 ﻿using System.Security.Principal;
 using BlogMVC.Models.Entities;
+using BlogMVC.Models.ViewModels;
 
 namespace BlogMVC.Repositories;
 
@@ -15,5 +16,7 @@ public interface IPostRepository
     
     void Delete(Post post, IPrincipal principal);
     
-    // TODO PostEditViewModel
+    int GetNumberOfComments(int postId);
+    
+    PostEditViewModel GetPostCreateViewModel();
 }

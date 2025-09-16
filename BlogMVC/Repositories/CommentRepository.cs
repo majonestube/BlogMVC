@@ -1,12 +1,14 @@
 ﻿using System.Security.Principal;
 using BlogMVC.Data;
 using BlogMVC.Models.Entities;
+using BlogMVC.Models.ViewModels;
 using Microsoft.AspNetCore.Identity;
 
 namespace BlogMVC.Repositories;
 
 public class CommentRepository(BlogDbContext db, UserManager<IdentityUser> userManager) : ICommentRepository
 {
+    private CommentEditViewModel _commentEditViewModel;
     public IEnumerable<Comment> GetComments(int postId)
     {
         return db.Comments.Where(c => c.PostId == postId).ToList();
@@ -40,5 +42,10 @@ public class CommentRepository(BlogDbContext db, UserManager<IdentityUser> userM
     {
         db.Comments.Remove(comment);
         db.SaveChanges();
+    }
+
+    public CommentEditViewModel GetCommentCreateViewModel()
+    {
+        return  _commentEditViewModel;
     }
 }

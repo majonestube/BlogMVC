@@ -1,5 +1,6 @@
 ﻿using System.Security.Principal;
 using BlogMVC.Models.Entities;
+using BlogMVC.Models.ViewModels;
 
 namespace BlogMVC.Repositories;
 
@@ -15,5 +16,5 @@ public interface ICommentRepository
     
     void Delete(Comment comment, IPrincipal principal);
     
-    //TODO CommentEditViewModel
+    CommentEditViewModel GetCommentCreateViewModel();
 }

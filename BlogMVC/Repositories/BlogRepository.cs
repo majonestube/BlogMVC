@@ -1,6 +1,7 @@
 ﻿using System.Security.Principal;
 using BlogMVC.Data;
 using BlogMVC.Models.Entities;
+using BlogMVC.Models.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -8,6 +9,7 @@ namespace BlogMVC.Repositories;
 
 public class BlogRepository(BlogDbContext db, UserManager<IdentityUser> userManager) : IBlogRepository
 {
+    private BlogEditViewModel _viewModel;
     public IEnumerable<Blog> GetBlogs()
     {
         try
@@ -38,6 +40,17 @@ public class BlogRepository(BlogDbContext db, UserManager<IdentityUser> userMana
         db.Blogs.Add(blog);
         db.SaveChanges();
     }
-    
-    // TODO add viewmodel
+
+    public BlogEditViewModel GetBlogCreateViewModel()
+    {
+        var profilePictures = Directory.GetFiles("wwwroot/images")
+            .Select(Path.GetFileName)
+            .ToList();
+        _viewModel = new BlogEditViewModel()
+        {
+            ProfilePictures = profilePictures,
+        };
+
+        return _viewModel;
+    }
 }

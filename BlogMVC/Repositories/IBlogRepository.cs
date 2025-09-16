@@ -1,5 +1,6 @@
 ﻿using System.Security.Principal;
 using BlogMVC.Models.Entities;
+using BlogMVC.Models.ViewModels;
 
 namespace BlogMVC.Repositories;
 
@@ -9,5 +10,6 @@ public interface IBlogRepository
     
     Blog? GetBlog(int id);
     void Create(Blog blog, IPrincipal principal);
-    // TODO BlogEditViewModel
+    
+    BlogEditViewModel GetBlogCreateViewModel();
 }
