@@ -1,11 +1,13 @@
-﻿using BlogMVC.Models.ViewModels;
+﻿using BlogMVC.Authorization;
+using BlogMVC.Models.Entities;
+using BlogMVC.Models.ViewModels;
 using BlogMVC.Repositories;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BlogMVC.Controllers;
 
-public class PostController(IPostRepository repository) : Controller
+public class PostController(IPostRepository repository, IAuthorizationService authorizationService) : Controller
 {
     public IActionResult Index(int blogId, string name)
     {
@@ -26,9 +28,53 @@ public class PostController(IPostRepository repository) : Controller
     
     // GET
     [Authorize]
-    public IActionResult Create()
+    public async Task<IActionResult> Create(int blogId)
     {
+        var blog = repository.GetBlog(blogId);
+        if (blog == null)
+        {
+            return NotFound();
+        }
+        
+        // Check ownership
+        var authResult = await authorizationService.AuthorizeAsync(User, blog, new OwnerRequirement());
+        if (!authResult.Succeeded)
+        {
+            return Forbid();
+        }
+        
         var post = repository.GetPostCreateViewModel();
         return View(post);
     }
+    
+    // POST
+    [HttpPost]
+    [Authorize]
+    public IActionResult Create([Bind("Title, Content")] PostEditViewModel post)
+    {
+        try
+        {
+            if (!ModelState.IsValid) return View(post);
+
+            var b = new Post
+            {
+                Id = post.Id,
+                Title = post.Title,
+                Content = post.Content,
+            };
+
+            repository.Create(b, User);
+            
+            // TODO TempData
+            return RedirectToAction("Index");
+
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            // TODO TempData
+            return RedirectToAction("Index");
+        }
+    }
+    
 }

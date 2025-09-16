@@ -1,5 +1,8 @@
+using BlogMVC.Authorization;
 using BlogMVC.Data;
+using BlogMVC.Models.Entities;
 using BlogMVC.Repositories;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -12,6 +15,9 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddTransient<IBlogRepository, BlogRepository>();
 builder.Services.AddTransient<IPostRepository, PostRepository>();
 builder.Services.AddTransient<ICommentRepository, CommentRepository>();
+
+// Authorization
+builder.Services.AddScoped<IAuthorizationHandler, BlogOwnerHandler>();
 
 // Db services
 builder.Services.AddDbContext<BlogDbContext>(options =>

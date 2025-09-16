@@ -6,6 +6,12 @@
 }
 
 <div class="container">
+    @if (!Model.Any())
+    {
+        <p>
+            No comments for this post!
+        </p>
+    }
     <div class="row">
         @foreach (var comment in Model)
         {
@@ -19,7 +25,7 @@
                     </div>
                 </div>
             </div>
-            
+
         }
         @{
             if (User.Identity is { IsAuthenticated: true })

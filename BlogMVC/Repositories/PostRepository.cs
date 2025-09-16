@@ -52,4 +52,9 @@ public class PostRepository(BlogDbContext db, UserManager<IdentityUser> userMana
     {
         return _postEditViewModel;
     }
+
+    public Blog GetBlog(int blogId)
+    {
+        return db.Blogs.FirstOrDefault(b => b.Id == blogId);
+    }
 }

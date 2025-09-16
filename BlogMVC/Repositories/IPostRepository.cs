@@ -19,4 +19,6 @@ public interface IPostRepository
     int GetNumberOfComments(int postId);
     
     PostEditViewModel GetPostCreateViewModel();
+    
+    public Blog GetBlog(int blogId);
 }
