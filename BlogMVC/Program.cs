@@ -4,6 +4,7 @@ using BlogMVC.Models.Entities;
 using BlogMVC.Repositories;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -18,6 +19,9 @@ builder.Services.AddTransient<ICommentRepository, CommentRepository>();
 
 // Authorization
 builder.Services.AddScoped<IAuthorizationHandler, BlogOwnerHandler>();
+
+// Temp Data
+builder.Services.AddSingleton<ITempDataProvider, CookieTempDataProvider>();
 
 // Db services
 builder.Services.AddDbContext<BlogDbContext>(options =>
@@ -40,10 +44,16 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+// For login
+app.UseAuthentication();
+
 app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Blog}/{action=Index}/{id?}");
+
+// For login
+app.MapRazorPages();
 
 app.Run();
