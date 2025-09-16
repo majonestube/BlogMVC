@@ -1,0 +1,31 @@
+﻿@model IEnumerable<BlogMVC.Models.Entities.Comment>
+
+@{
+    ViewBag.Title = ViewBag.Title ?? "Post";
+    Layout = "_Layout";
+}
+
+<div class="container">
+    <div class="row">
+        @foreach (var comment in Model)
+        {
+            <div class="col-mb-4 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">@comment.Owner.UserName</h5>
+                        <p class="card-text overflow-text">@comment.Content</p>
+                        <p class="card-subtitle">Last modified: @comment.Modified</p>
+                        <p class="card-subtitle">Created: @comment.Created</p>
+                    </div>
+                </div>
+            </div>
+            
+        }
+        @{
+            if (User.Identity is { IsAuthenticated: true })
+            {
+                //TODO <a href="@Url.Action("Create", "Blog")" class="btn btn-primary">Create Blog</a>
+            }
+        }
+    </div>
+</div>

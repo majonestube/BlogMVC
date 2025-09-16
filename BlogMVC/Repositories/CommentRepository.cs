@@ -3,6 +3,7 @@ using BlogMVC.Data;
 using BlogMVC.Models.Entities;
 using BlogMVC.Models.ViewModels;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 
 namespace BlogMVC.Repositories;
 
@@ -11,7 +12,10 @@ public class CommentRepository(BlogDbContext db, UserManager<IdentityUser> userM
     private CommentEditViewModel _commentEditViewModel;
     public IEnumerable<Comment> GetComments(int postId)
     {
-        return db.Comments.Where(c => c.PostId == postId).ToList();
+        return db.Comments
+            .Where(c => c.PostId == postId)
+            .Include(c => c.Owner)
+            .ToList();
     }
 
     public Comment GetComment(int commentId)
