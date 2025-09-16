@@ -9,7 +9,7 @@ namespace BlogMVC.Controllers;
 
 public class PostController(IPostRepository repository, IAuthorizationService authorizationService) : Controller
 {
-    public IActionResult Index(int blogId, string name)
+    public async Task<IActionResult> Index(int blogId, string name)
     {
         var posts = repository.GetPosts(blogId)
             .Select(p => new PostsViewModel
@@ -22,6 +22,15 @@ public class PostController(IPostRepository repository, IAuthorizationService au
                 CommentCount = repository.GetNumberOfComments(p.Id)
             }).ToList();
         ViewBag.Title = name;
+        
+        // Check if the user is the blog owner
+        var blog = repository.GetBlog(blogId);
+        ViewBag.CanCreatePost = false;
+        if (User.Identity?.IsAuthenticated == true && blog != null)
+        {
+            var authResult = await authorizationService.AuthorizeAsync(User, blog, new OwnerRequirement());
+            ViewBag.CanCreatePost = authResult.Succeeded;
+        }
         
         return View(posts);
     }

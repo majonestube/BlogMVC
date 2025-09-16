@@ -1,4 +1,5 @@
-﻿@model IEnumerable<BlogMVC.Models.ViewModels.PostsViewModel>
+﻿@using Azure.Core
+@model IEnumerable<BlogMVC.Models.ViewModels.PostsViewModel>
 
 @{
     ViewBag.Title = ViewBag.Title ?? "Blog";
@@ -25,9 +26,9 @@
             
         }
         @{
-            if (User.Identity is { IsAuthenticated: true })
+            if (ViewBag.CanCreatePost)
             {
-                <a href="@Url.Action("Create", "Blog")" class="btn btn-primary">Create Blog</a>
+                <a href="@Url.Action("Create", "Post", new {blogId = Model.First().BlogId})" class="btn btn-primary">Create New Post</a>
             }
         }
     </div>

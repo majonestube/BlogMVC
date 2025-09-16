@@ -18,7 +18,7 @@ public class BlogDbContext(DbContextOptions<BlogDbContext> options) : IdentityDb
         var defaultUser = new IdentityUser
         {
             Id = "default-id",
-            UserName = "default-user",
+            UserName = "default@example.com",
             NormalizedUserName = "DEFAULT_USER",
             Email = "default@example.com",
             NormalizedEmail = "DEFAULT@EXAMPLE.COM",
@@ -30,7 +30,7 @@ public class BlogDbContext(DbContextOptions<BlogDbContext> options) : IdentityDb
         var donkeyUser = new IdentityUser
         {
             Id = "donkey-id",
-            UserName = "theDonkey",
+            UserName = "donkey@example.com",
             NormalizedUserName = "THEDONKEY",
             Email = "donkey@example.com",
             NormalizedEmail = "DONKEY@EXAMPLE.COM",
